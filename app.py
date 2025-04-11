@@ -1,20 +1,20 @@
-from flask import Flask, render_template, request
-from models.conversation_handler import handle_input
-from dotenv import load_dotenv
+# app.py
+from flask import Flask, request, jsonify
+from models.chatbot import ChatRasa
 
-load_dotenv()
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return render_template('chatbot_template.html')
+chatbot = ChatRasa()
 
-@app.route('/chat', methods=['POST'])
+@app.route("/chat", methods=["POST"])
 def chat():
-    user_input = request.form['user_input']
-    customer_id = request.form['customer_id']  # Pass customer ID through the frontend
-    response = handle_input(user_input, customer_id)
-    return response
+    user_message = request.json.get("message")
+    if user_message:
+        # Get response from Rasa agent
+        response = chatbot.get_response(user_message)
+        return jsonify({"response": response}), 200
+    else:
+        return jsonify({"error": "No message provided"}), 400
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5005)
