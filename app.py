@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 from models.conversation_handler import handle_input
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
 
 @app.route('/')
