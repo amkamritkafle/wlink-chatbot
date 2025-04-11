@@ -1,34 +1,16 @@
-# Core LangChain Packages
 langchain>=0.1.17
 langchain-community>=0.0.30
-langchain-openai>=0.0.7
-
-# OpenAI Integration
-openai>=1.6.1
-
-# Data Handling & Validation
+streamlit==1.30.0
 pydantic>=2.1.1
 pydantic-core>=2.4.0
-packaging<24  # Important for compatibility with Streamlit
+packaging<24
+rasa
 orjson
 httpx
-
-# Web Framework (Flask-based API)
 flask
-
-# Optional: Streamlit-based frontend
-streamlit==1.30.0  # Comment/remove if not used
-
-# Environment variable management
 python-dotenv
-
-# CLI & Logging tools
 tqdm
-
-# Required for some LangChain integrations
 typing-extensions>=4.5.0
 typing-inspection>=0.4.0
 annotated-types>=0.5.0
-
-# Compatibility (Avoid PyArrow issues)
-pyarrow==13.0.0  # Optional, only if needed
+sqlalchemy<2.0
